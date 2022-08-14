@@ -12,31 +12,28 @@ import { ObjectListScreen } from "./components/screen/ObjectList";
 
 export default function App() {
   return (
-    <>
-      <SafeAreaView />
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>objective manager</Text>
-        </View>
-
-        <ScrollView>
-          <ObjectListScreen />
-        </ScrollView>
-
-        <TouchableOpacity style={styles.button}>
-          <Ionicons name="add-circle" size={48} color="#6B7280" />
-        </TouchableOpacity>
-
-        <View style={styles.footer}>
-          <Footer />
-        </View>
+    <SafeAreaView style={styles.safearea}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>objective manager</Text>
       </View>
-    </>
+
+      <ScrollView>
+        <ObjectListScreen />
+      </ScrollView>
+
+      <TouchableOpacity style={styles.button}>
+        <Ionicons name="add-circle" size={48} color="#6B7280" />
+      </TouchableOpacity>
+
+      <View style={styles.footer}>
+        <Footer />
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safearea: {
     flex: 1,
   },
   header: {
