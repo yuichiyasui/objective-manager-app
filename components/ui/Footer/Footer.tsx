@@ -1,10 +1,20 @@
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../navigation";
+import { Routes } from "../../../navigation/routes";
 
 export const Footer = (): JSX.Element => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.footer}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(Routes.ObjectList.screenName);
+        }}
+        style={styles.button}
+      >
         <Ionicons
           name="list-outline"
           size={28}
@@ -13,7 +23,12 @@ export const Footer = (): JSX.Element => {
         />
         <Text style={styles.text}>目標リスト</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(Routes.CompletionList.screenName);
+        }}
+        style={styles.button}
+      >
         <Ionicons
           name="ribbon-outline"
           size={28}
@@ -22,7 +37,12 @@ export const Footer = (): JSX.Element => {
         />
         <Text style={styles.text}>達成リスト</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(Routes.Settings.screenName);
+        }}
+        style={styles.button}
+      >
         <Ionicons
           name="settings-outline"
           size={28}
