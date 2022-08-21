@@ -6,44 +6,41 @@ import {
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { DefaultLayout } from "../../components/layouts/DefaultLayouts";
 
 export const ObjectListScreen = (): JSX.Element => {
   return (
-    <DefaultLayout>
-      <View style={styles.contentContainer}>
-        <ScrollView alwaysBounceVertical={false} style={styles.main}>
-          <View style={styles.headingContainer}>
-            <View>
-              <Text style={styles.heading}>カテゴリー</Text>
-              <TouchableOpacity>
-                <Text>すべて</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.layoutSelectorContainer}>
-              <TouchableOpacity>
-                <Ionicons name="list-outline" size={28} color="#6B7280" />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.layoutGridButton}>
-                <Ionicons name="grid-outline" size={28} color="#6B7280" />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View style={styles.doingSection}>
-            <Text style={styles.statusHeading}>進行中</Text>
-          </View>
-
+    <View style={styles.contentContainer}>
+      <ScrollView alwaysBounceVertical={false} style={styles.main}>
+        <View style={styles.headingContainer}>
           <View>
-            <Text style={styles.statusHeading}>未着手</Text>
+            <Text style={styles.heading}>カテゴリー</Text>
+            <TouchableOpacity>
+              <Text>すべて</Text>
+            </TouchableOpacity>
           </View>
-        </ScrollView>
+          <View style={styles.layoutSelectorContainer}>
+            <TouchableOpacity>
+              <Ionicons name="list-outline" size={28} color="#6B7280" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.layoutGridButton}>
+              <Ionicons name="grid-outline" size={28} color="#6B7280" />
+            </TouchableOpacity>
+          </View>
+        </View>
 
-        <TouchableOpacity style={styles.button}>
-          <Ionicons name="add-circle" size={48} color="#6B7280" />
-        </TouchableOpacity>
-      </View>
-    </DefaultLayout>
+        <View style={styles.doingSection}>
+          <Text style={styles.statusHeading}>進行中</Text>
+        </View>
+
+        <View>
+          <Text style={styles.statusHeading}>未着手</Text>
+        </View>
+      </ScrollView>
+
+      <TouchableOpacity style={styles.button}>
+        <Ionicons name="add-circle" size={48} color="#6B7280" />
+      </TouchableOpacity>
+    </View>
   );
 };
 
