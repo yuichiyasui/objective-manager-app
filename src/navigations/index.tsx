@@ -2,9 +2,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import { CompletionListScreen } from "../screens/CompletionList";
-import { ObjectListScreen } from "../screens/ObjectList";
-import { SettingsScreen } from "../screens/Settings";
+import { CompletionListScreen } from "~/screens/CompletionList";
+import { ObjectListScreen } from "~/screens/ObjectList";
+import { SettingsScreen } from "~/screens/Settings";
 import { Routes } from "./routes";
 
 export type RootTabParamList = {
