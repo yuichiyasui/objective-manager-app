@@ -1,6 +1,7 @@
+import { registerRootComponent } from "expo";
 import { StatusBar, View, StyleSheet } from "react-native";
 
-import { Navigation } from "./navigation";
+import { Navigation } from "~/navigations";
 
 export default function App() {
   return (
@@ -10,6 +11,8 @@ export default function App() {
     </View>
   );
 }
+
+registerRootComponent(App);
 
 const styles = StyleSheet.create({
   container: {
