@@ -6,8 +6,14 @@ import {
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
+import { ObjectListScreenNavigationProp, Routes } from "~/navigations/routes";
+import { colors } from "~/constants/colors";
 
 export const ObjectListScreen = (): JSX.Element => {
+  const { navigate } = useNavigation<ObjectListScreenNavigationProp>();
+
   return (
     <View style={styles.contentContainer}>
       <ScrollView alwaysBounceVertical={false} style={styles.main}>
@@ -20,10 +26,10 @@ export const ObjectListScreen = (): JSX.Element => {
           </View>
           <View style={styles.layoutSelectorContainer}>
             <TouchableOpacity>
-              <Ionicons name="list-outline" size={28} color="#6B7280" />
+              <Ionicons name="list-outline" size={28} color={colors.gray500} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.layoutGridButton}>
-              <Ionicons name="grid-outline" size={28} color="#6B7280" />
+              <Ionicons name="grid-outline" size={28} color={colors.gray500} />
             </TouchableOpacity>
           </View>
         </View>
@@ -37,8 +43,11 @@ export const ObjectListScreen = (): JSX.Element => {
         </View>
       </ScrollView>
 
-      <TouchableOpacity style={styles.button}>
-        <Ionicons name="add-circle" size={48} color="#6B7280" />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigate(Routes.CreateObject.screenName)}
+      >
+        <Ionicons name="add-circle" size={48} color={colors.gray500} />
       </TouchableOpacity>
     </View>
   );
