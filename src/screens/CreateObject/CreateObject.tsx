@@ -17,6 +17,7 @@ import { AsyncAlert } from "~/utils/alert";
 import { DateInput } from "~/components/DateInput";
 import { HalfModal } from "~/components/HalfModal";
 import { Button } from "~/components/Button";
+import { objectRepository } from "~/repositories/objects";
 
 export const CreateObjectScreen = (): JSX.Element => {
   const { navigate } = useNavigation<ObjectListScreenNavigationProp>();
@@ -29,7 +30,12 @@ export const CreateObjectScreen = (): JSX.Element => {
     useState(false);
 
   const submit = async () => {
-    // TODO: DBへの登録処理を実装する
+    objectRepository.insert({
+      title,
+      purpose,
+      description: content,
+      deadlineDate: dayjs(deadlineDate).format("YYYY-MM-DD"),
+    });
     await AsyncAlert({ title: "作成しました" });
     navigate(Routes.ObjectList.screenName);
   };

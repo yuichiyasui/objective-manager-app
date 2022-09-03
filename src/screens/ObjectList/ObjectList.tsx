@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -10,9 +11,17 @@ import { useNavigation } from "@react-navigation/native";
 
 import { ObjectListScreenNavigationProp, Routes } from "~/navigations/routes";
 import { colors } from "~/constants/colors";
+import { useEffect } from "react";
+import { objectRepository, ObjectType } from "~/repositories/objects";
 
 export const ObjectListScreen = (): JSX.Element => {
   const { navigate } = useNavigation<ObjectListScreenNavigationProp>();
+
+  const [objects, setObjects] = useState<ObjectType[]>([]);
+
+  useEffect(() => {
+    objectRepository.selectAll(setObjects);
+  }, []);
 
   return (
     <View style={styles.contentContainer}>
@@ -41,6 +50,9 @@ export const ObjectListScreen = (): JSX.Element => {
         <View>
           <Text style={styles.statusHeading}>未着手</Text>
         </View>
+        <Text>
+          {objects.length === 0 ? "目標がありません" : JSON.stringify(objects)}
+        </Text>
       </ScrollView>
 
       <TouchableOpacity
