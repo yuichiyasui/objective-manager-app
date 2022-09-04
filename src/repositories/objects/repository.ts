@@ -17,6 +17,7 @@ type InsertObjectParameter = {
   purpose: string;
   description: string;
   deadlineDate: string;
+  imageUrl: string | null;
 };
 
 const insert = ({
@@ -24,6 +25,7 @@ const insert = ({
   purpose,
   description,
   deadlineDate,
+  imageUrl,
 }: InsertObjectParameter) => {
   const sql = `
     INSERT INTO objects (
@@ -31,15 +33,17 @@ const insert = ({
       purpose,
       description,
       deadline_date,
+      image_url,
       achieved,
       created_at
-    ) values (?, ?, ?, ?, ?, ?);
+    ) values (?, ?, ?, ?, ?, ?, ?);
   `;
   const args: [
     InsertObjectParameter["title"],
     InsertObjectParameter["purpose"],
     InsertObjectParameter["description"],
     InsertObjectParameter["deadlineDate"],
+    InsertObjectParameter["imageUrl"],
     SQLiteBoolean,
     SQLiteTimestamp
   ] = [
@@ -47,6 +51,7 @@ const insert = ({
     purpose,
     description,
     deadlineDate,
+    imageUrl,
     SQLiteBooleanValue.false,
     dayjs().toString(),
   ];
@@ -91,6 +96,7 @@ const selectAll = (
       description, 
       achieved, 
       deadline_date,
+      image_url,
       created_at, 
       modified_at
     FROM objects;

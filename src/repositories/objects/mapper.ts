@@ -11,6 +11,7 @@ export const mapObjects = (objectsEntities: ObjectEntity[]): ObjectType[] => {
       purpose,
       description,
       deadlineDate: entity.deadline_date,
+      imageUrl: entity.image_url,
       achieved: convertBooleanValue(entity.achieved),
       createdAt: entity.created_at,
       modifiedAt: entity.modified_at,

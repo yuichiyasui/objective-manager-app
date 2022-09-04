@@ -17,6 +17,7 @@ export type ObjectEntity = {
   purpose: string;
   description: string;
   achieved: SQLiteBoolean;
+  image_url: string | null;
   deadline_date: SQLiteDate;
   created_at: SQLiteTimestamp;
   modified_at: SQLiteTimestamp | null;

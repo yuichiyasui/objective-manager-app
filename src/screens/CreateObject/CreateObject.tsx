@@ -5,10 +5,12 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import dayjs from "dayjs";
+import * as ImagePicker from "expo-image-picker";
 
 import { styles } from "./styles";
 import { colors } from "~/constants/colors";
@@ -28,6 +30,16 @@ export const CreateObjectScreen = (): JSX.Element => {
   const [deadlineDate, setDeadlineDate] = useState<Date>(new Date());
   const [isVisibleDeadlineDateModal, setIsVisibleDeadlineModal] =
     useState(false);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const pickImage = async () => {
+    const data = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    });
+    if (data.cancelled) return;
+
+    setImageUrl(data.uri);
+  };
 
   const submit = async () => {
     objectRepository.insert({
@@ -35,6 +47,7 @@ export const CreateObjectScreen = (): JSX.Element => {
       purpose,
       description: content,
       deadlineDate: dayjs(deadlineDate).format("YYYY-MM-DD"),
+      imageUrl,
     });
     await AsyncAlert({ title: "作成しました" });
     navigate(Routes.ObjectList.screenName);
@@ -86,6 +99,42 @@ export const CreateObjectScreen = (): JSX.Element => {
               color={colors.gray500}
             />
           </TouchableOpacity>
+        </View>
+        <View style={styles.formControl}>
+          <Text style={styles.label}>イメージ画像</Text>
+          <View style={styles.imagePicker}>
+            {!!imageUrl && (
+              <TouchableOpacity
+                onPress={() => setImageUrl(null)}
+                style={styles.imagePickerRemoveButton}
+              >
+                <Ionicons
+                  name="close-circle"
+                  size={28}
+                  color={colors.gray500}
+                  style={styles.imagePickerIcon}
+                />
+              </TouchableOpacity>
+            )}
+            <TouchableOpacity
+              onPress={pickImage}
+              style={styles.imagePickerButton}
+            >
+              {imageUrl ? (
+                <Image source={{ uri: imageUrl }} style={styles.thumnail} />
+              ) : (
+                <>
+                  <Ionicons
+                    name="image-outline"
+                    size={28}
+                    color={colors.gray500}
+                    style={styles.imagePickerIcon}
+                  />
+                  <Text style={styles.imagePickerText}>画像を選択</Text>
+                </>
+              )}
+            </TouchableOpacity>
+          </View>
         </View>
 
         <Button type="submit" label="作成" onPress={submit} />
