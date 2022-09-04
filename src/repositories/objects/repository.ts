@@ -10,6 +10,7 @@ import {
 } from "~/constants/sqlite";
 import { ObjectEntity, ObjectType } from "./type";
 import { mapObjects } from "./mapper";
+import { logger } from "~/utils/logger";
 
 type InsertObjectParameter = {
   title: string;
@@ -54,11 +55,11 @@ const insert = ({
   const callback: SQLiteCallback = (error, resultSet) => {
     const errorMessage = "insert object is failed.";
     if (error) {
-      console.error(`[${error.name}]: ${error.message}`);
+      logger.error(`[${error.name}]: ${error.message}`);
       throw new Error(errorMessage);
     }
     if (!resultSet) {
-      console.error("resultSet is undefined.");
+      logger.error("resultSet is undefined.");
       throw new Error(errorMessage);
     }
     const errorResults = resultSet.filter(
@@ -66,14 +67,14 @@ const insert = ({
     );
     if (errorResults.length > 0) {
       errorResults.forEach((errorResult) => {
-        console.error(
+        logger.error(
           `[${errorResult.error.name}]: ${errorResult.error.message}`
         );
       });
       throw new Error(errorMessage);
     }
 
-    console.info("insert object successed.");
+    logger.info("insert object successed.");
   };
 
   db.exec(queries, readOnly, callback);
@@ -100,11 +101,11 @@ const selectAll = (
   const callback: SQLiteCallback = (error, resultSet) => {
     const errorMessage = "selectAll objects is failed.";
     if (error) {
-      console.error(`[${error.name}]: ${error.message}`);
+      logger.error(`[${error.name}]: ${error.message}`);
       throw new Error(errorMessage);
     }
     if (!resultSet) {
-      console.error("resultSet is undefined.");
+      logger.error("resultSet is undefined.");
       throw new Error(errorMessage);
     }
     const errorResults = resultSet.filter(
@@ -112,7 +113,7 @@ const selectAll = (
     );
     if (errorResults.length > 0) {
       errorResults.forEach((errorResult) => {
-        console.error(
+        logger.error(
           `[${errorResult.error.name}]: ${errorResult.error.message}`
         );
       });
@@ -121,7 +122,7 @@ const selectAll = (
     const rows = resultSet
       .filter((result): result is ResultSet => !("error" in result))
       .flatMap((result) => result.rows);
-    console.info("selectAll objects is success.");
+    logger.info("selectAll objects is success.");
 
     const objects = mapObjects(rows as ObjectEntity[]);
     setObjects(objects);

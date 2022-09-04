@@ -5,6 +5,7 @@ import {
   SQLiteCallback,
   WebSQLDatabase,
 } from "expo-sqlite";
+import { logger } from "~/utils/logger";
 
 export const initializeDatabase = ({ exec }: WebSQLDatabase) => {
   const queries: Query[] = [
@@ -28,11 +29,11 @@ export const initializeDatabase = ({ exec }: WebSQLDatabase) => {
   const callback: SQLiteCallback = (error, resultSet) => {
     const errorMessage = "initializeDatabase is failed.";
     if (error) {
-      console.error(JSON.stringify(error));
+      logger.error(JSON.stringify(error));
       throw new Error(errorMessage);
     }
     if (!resultSet) {
-      console.error("resultSet is undefined.");
+      logger.error("resultSet is undefined.");
       throw new Error(errorMessage);
     }
     const errorResults = resultSet.filter(
@@ -40,14 +41,14 @@ export const initializeDatabase = ({ exec }: WebSQLDatabase) => {
     );
     if (errorResults.length > 0) {
       errorResults.forEach((errorResult) => {
-        console.error(
+        logger.error(
           `[${errorResult.error.name}]: ${errorResult.error.message}`
         );
       });
       throw new Error(errorMessage);
     }
 
-    console.info("create table success");
+    logger.info("create table success");
   };
 
   exec(queries, readOnly, callback);
