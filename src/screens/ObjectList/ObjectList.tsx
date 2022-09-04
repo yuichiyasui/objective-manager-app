@@ -1,18 +1,21 @@
-import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { useState, useEffect } from "react";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { ObjectListScreenNavigationProp, Routes } from "~/navigations/routes";
 import { colors } from "~/constants/colors";
+import { objectRepository, ObjectType } from "~/repositories/objects";
+import { styles } from "./styles";
 
 export const ObjectListScreen = (): JSX.Element => {
   const { navigate } = useNavigation<ObjectListScreenNavigationProp>();
+
+  const [objects, setObjects] = useState<ObjectType[]>([]);
+
+  useEffect(() => {
+    objectRepository.selectAll(setObjects);
+  }, []);
 
   return (
     <View style={styles.contentContainer}>
@@ -41,6 +44,9 @@ export const ObjectListScreen = (): JSX.Element => {
         <View>
           <Text style={styles.statusHeading}>未着手</Text>
         </View>
+        <Text>
+          {objects.length === 0 ? "目標がありません" : JSON.stringify(objects)}
+        </Text>
       </ScrollView>
 
       <TouchableOpacity
@@ -52,46 +58,3 @@ export const ObjectListScreen = (): JSX.Element => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-    position: "relative",
-    marginHorizontal: 12,
-  },
-  main: {
-    flex: 1,
-    paddingVertical: 16,
-  },
-  headingContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "flex-end",
-    marginBottom: 24,
-  },
-  heading: {
-    fontWeight: "700",
-    fontSize: 20,
-    marginBottom: 8,
-  },
-  layoutSelectorContainer: {
-    display: "flex",
-    flexDirection: "row",
-    marginLeft: "auto",
-  },
-  layoutGridButton: {
-    marginLeft: 16,
-  },
-  doingSection: {
-    marginBottom: 28,
-  },
-  statusHeading: {
-    fontSize: 20,
-    fontWeight: "700",
-  },
-  button: {
-    position: "absolute",
-    bottom: 12,
-    right: 0,
-  },
-});
