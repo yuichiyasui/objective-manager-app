@@ -3,7 +3,13 @@ import { Query, ResultSet, ResultSetError, SQLiteCallback } from "expo-sqlite";
 import dayjs from "dayjs";
 
 import { db } from "~/database";
-import { SQLiteBooleanType, SQLiteBooleanValue } from "~/constants/sqlite";
+import {
+  SQLiteBoolean,
+  SQLiteBooleanValue,
+  SQLiteTimestamp,
+} from "~/constants/sqlite";
+import { ObjectEntity, ObjectType } from "./type";
+import { mapObjects } from "./mapper";
 
 type InsertObjectParameter = {
   title: string;
@@ -24,7 +30,7 @@ const insert = ({
       purpose,
       description,
       deadline_date,
-      achireved,
+      achieved,
       created_at
     ) values (?, ?, ?, ?, ?, ?);
   `;
@@ -33,8 +39,8 @@ const insert = ({
     InsertObjectParameter["purpose"],
     InsertObjectParameter["description"],
     InsertObjectParameter["deadlineDate"],
-    SQLiteBooleanType,
-    string
+    SQLiteBoolean,
+    SQLiteTimestamp
   ] = [
     title,
     purpose,
@@ -73,17 +79,6 @@ const insert = ({
   db.exec(queries, readOnly, callback);
 };
 
-export type ObjectType = {
-  id: number;
-  title: string;
-  purpose: string;
-  description: string;
-  achireved: boolean;
-  deadline_date: string;
-  created_at: string;
-  modified_at: string | null;
-};
-
 const selectAll = (
   setObjects: Dispatch<SetStateAction<ObjectType[]>>
 ): void => {
@@ -93,7 +88,7 @@ const selectAll = (
       title,
       purpose,
       description, 
-      achireved, 
+      achieved, 
       deadline_date,
       created_at, 
       modified_at
@@ -127,7 +122,9 @@ const selectAll = (
       .filter((result): result is ResultSet => !("error" in result))
       .flatMap((result) => result.rows);
     console.info("selectAll objects is success.");
-    setObjects(rows as ObjectType[]);
+
+    const objects = mapObjects(rows as ObjectEntity[]);
+    setObjects(objects);
   };
 
   db.exec(queries, readOnly, callback);

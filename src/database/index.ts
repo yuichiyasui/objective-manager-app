@@ -7,7 +7,7 @@ import {
 } from "expo-sqlite";
 
 export const initializeDatabase = ({ exec }: WebSQLDatabase) => {
-  const query: Query[] = [
+  const queries: Query[] = [
     {
       sql: `
         CREATE TABLE IF NOT EXISTS objects (
@@ -16,7 +16,7 @@ export const initializeDatabase = ({ exec }: WebSQLDatabase) => {
           purpose TEXT NOT NULL,
           description TEXT NOT NULL,
           deadline_date TEXT NOT NULL,
-          achireved INTEGER NOT NULL,
+          achieved INTEGER NOT NULL,
           created_at TEXT NOT NULL,
           modified_at TEXT
         );
@@ -50,7 +50,7 @@ export const initializeDatabase = ({ exec }: WebSQLDatabase) => {
     console.info("create table success");
   };
 
-  exec(query, readOnly, callback);
+  exec(queries, readOnly, callback);
 };
 
 export const db = openDatabase("objective-manager");
