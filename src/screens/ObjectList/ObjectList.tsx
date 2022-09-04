@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { ObjectListScreenNavigationProp, Routes } from "~/navigations/routes";
 import { colors } from "~/constants/colors";
@@ -13,9 +13,9 @@ export const ObjectListScreen = (): JSX.Element => {
 
   const [objects, setObjects] = useState<ObjectType[]>([]);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     objectRepository.selectAll(setObjects);
-  }, []);
+  });
 
   return (
     <View style={styles.contentContainer}>

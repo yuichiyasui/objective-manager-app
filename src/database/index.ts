@@ -17,6 +17,7 @@ export const initializeDatabase = ({ exec }: WebSQLDatabase) => {
           purpose TEXT NOT NULL,
           description TEXT NOT NULL,
           deadline_date TEXT NOT NULL,
+          image_url TEXT,
           achieved INTEGER NOT NULL,
           created_at TEXT NOT NULL,
           modified_at TEXT

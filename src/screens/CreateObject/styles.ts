@@ -49,4 +49,37 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 20,
   },
+  imagePicker: {
+    backgroundColor: colors.white,
+    borderColor: colors.gray300,
+    borderWidth: 1,
+    borderRadius: 6,
+    width: "80%",
+    height: 200,
+    padding: 24,
+    position: "relative",
+  },
+  imagePickerButton: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imagePickerIcon: {
+    marginBottom: 10,
+  },
+  imagePickerText: {
+    color: colors.gray500,
+  },
+  thumnail: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
+  },
+  imagePickerRemoveButton: {
+    position: "absolute",
+    alignSelf: "flex-start",
+    top: 4,
+    right: 4,
+    zIndex: 1,
+  },
 });
