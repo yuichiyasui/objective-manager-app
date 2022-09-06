@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
   statusHeading: {
     fontSize: 20,
     fontWeight: "700",
+    marginBottom: 12,
   },
   button: {
     position: "absolute",
