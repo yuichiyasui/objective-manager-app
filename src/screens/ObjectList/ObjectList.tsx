@@ -8,6 +8,7 @@ import { colors } from "~/constants/colors";
 import { objectRepository, ObjectType } from "~/repositories/objects";
 import { styles } from "./styles";
 import { ListView } from "./parts/ListView";
+import { GalleryView } from "./parts/GalleryView";
 
 export const ObjectListScreen = (): JSX.Element => {
   const { navigate } = useNavigation<ObjectListScreenNavigationProp>();
@@ -62,7 +63,11 @@ export const ObjectListScreen = (): JSX.Element => {
 
         <View>
           <Text style={styles.statusHeading}>未着手</Text>
-          <ListView objects={objects} />
+          {displayType === "list" ? (
+            <ListView objects={objects} />
+          ) : (
+            <GalleryView objects={objects} />
+          )}
         </View>
       </View>
 

@@ -6,6 +6,7 @@ export type ObjectType = {
   purpose: string;
   description: string;
   deadlineDate: string;
+  imageUrl: string | null;
   achieved: boolean;
   createdAt: string;
   modifiedAt: string | null;
