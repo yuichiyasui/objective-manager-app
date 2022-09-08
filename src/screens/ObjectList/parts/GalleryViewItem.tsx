@@ -1,11 +1,4 @@
-import {
-  TouchableOpacity,
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  FlatList,
-} from "react-native";
+import { TouchableOpacity, Text, View, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { ObjectListScreenNavigationProp } from "~/navigations/routes";
@@ -19,7 +12,11 @@ type Props = {
   }[];
 };
 
-const ListItem = ({ id, imageUrl, title }: Props["objects"][number]) => {
+export const GalleryViewItem = ({
+  id,
+  imageUrl,
+  title,
+}: Props["objects"][number]) => {
   const { navigate } = useNavigation<ObjectListScreenNavigationProp>();
 
   return (
@@ -36,17 +33,6 @@ const ListItem = ({ id, imageUrl, title }: Props["objects"][number]) => {
         <Image source={{ uri: imageUrl }} style={styles.itemImage} />
       )}
     </TouchableOpacity>
-  );
-};
-
-export const GalleryView = ({ objects }: Props) => {
-  return (
-    <FlatList
-      data={objects}
-      keyExtractor={(item) => item.id.toString()}
-      numColumns={3}
-      renderItem={({ item }) => <ListItem {...item} />}
-    />
   );
 };
 

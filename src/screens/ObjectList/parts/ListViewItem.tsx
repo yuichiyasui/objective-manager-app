@@ -11,20 +11,31 @@ type Props = {
   }[];
 };
 
-const ListItem = ({
+export const ListViewItem = ({
   object,
+  isFirst,
   isLast,
 }: {
   object: Props["objects"][number];
+  isFirst: boolean;
   isLast: boolean;
 }) => {
   const { navigate } = useNavigation<ObjectListScreenNavigationProp>();
+  const itemStyle = [
+    styles.item,
+    isFirst ? styles.firstItem : undefined,
+    isLast ? styles.lastItem : undefined,
+  ];
+  const itemButtonStyle = [
+    styles.itemButton,
+    isLast ? styles.lastItemButton : undefined,
+  ];
 
   return (
-    <View style={isLast ? undefined : styles.item}>
+    <View style={itemStyle}>
       <TouchableOpacity
         onPress={() => navigate("ObjectDetail", { objectId: object.id })}
-        style={styles.itemButton}
+        style={itemButtonStyle}
       >
         <Text style={styles.itemTitle}>{object.title}</Text>
         <View style={styles.itemDeadlineDate}>
@@ -36,36 +47,32 @@ const ListItem = ({
   );
 };
 
-export const ListView = ({ objects }: Props) => {
-  return (
-    <View style={styles.list}>
-      {objects.map((object, index) => (
-        <ListItem
-          key={object.id}
-          object={object}
-          isLast={index === objects.length - 1}
-        />
-      ))}
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
-  list: {
-    backgroundColor: colors.white,
-    borderRadius: 6,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
   item: {
-    borderBottomColor: colors.gray300,
-    borderBottomWidth: 1,
+    paddingHorizontal: 10,
+    backgroundColor: colors.white,
+  },
+  firstItem: {
+    paddingTop: 4,
+    borderTopRightRadius: 6,
+    borderTopLeftRadius: 6,
+  },
+  lastItem: {
+    paddingBottom: 4,
+    borderBottomRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomWidth: 0,
   },
   itemButton: {
     padding: 16,
+    borderBottomColor: colors.gray300,
+    borderBottomWidth: 1,
+  },
+  lastItemButton: {
+    borderBottomWidth: 0,
   },
   itemTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "700",
     marginBottom: 4,
   },

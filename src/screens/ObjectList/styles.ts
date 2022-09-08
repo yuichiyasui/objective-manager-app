@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "~/constants/colors";
 
 export const styles = StyleSheet.create({
   contentContainer: {
@@ -6,15 +7,12 @@ export const styles = StyleSheet.create({
     position: "relative",
     marginHorizontal: 12,
   },
-  main: {
-    flex: 1,
-    paddingVertical: 16,
-  },
   headingContainer: {
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-end",
-    marginBottom: 24,
+    marginBottom: 16,
+    paddingTop: 16,
   },
   heading: {
     fontWeight: "700",
@@ -29,17 +27,25 @@ export const styles = StyleSheet.create({
   layoutGridButton: {
     marginLeft: 16,
   },
-  doingSection: {
-    marginBottom: 28,
-  },
-  statusHeading: {
-    fontSize: 20,
-    fontWeight: "700",
-    marginBottom: 12,
+  columnWrapper: {
+    backgroundColor: colors.white,
   },
   button: {
     position: "absolute",
     bottom: 12,
     right: 0,
+    borderRadius: 100,
+    backgroundColor: colors.blue,
+    justifyContent: "center",
+    width: 48,
+    height: 48,
+    shadowColor: colors.black,
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+  },
+  buttonIcon: {
+    textAlign: "center",
+    alignSelf: "center",
+    paddingLeft: 2,
   },
 });
