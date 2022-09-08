@@ -14,7 +14,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import { styles } from "./styles";
 import { colors } from "~/constants/colors";
-import { ObjectListScreenNavigationProp, Routes } from "~/navigations/routes";
+import { ObjectListScreenNavigationProp } from "~/navigations/routes";
 import { AsyncAlert } from "~/utils/alert";
 import { DateInput } from "~/components/DateInput";
 import { HalfModal } from "~/components/HalfModal";
@@ -50,7 +50,7 @@ export const CreateObjectScreen = (): JSX.Element => {
       imageUrl,
     });
     await AsyncAlert({ title: "作成しました" });
-    navigate(Routes.ObjectList.screenName);
+    navigate("ObjectList");
   };
 
   const screenDate = dayjs(deadlineDate).format("YYYY-MM-DD");

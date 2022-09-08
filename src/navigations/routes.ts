@@ -2,31 +2,37 @@ import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { CompositeNavigationProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-export const Routes = {
+type Routes = {
   ObjectListStackNavigation: {
-    screen: "ObjectListStackNavigation",
-    params: undefined,
-  },
+    screen: "ObjectListStackNavigation";
+    params: undefined;
+  };
   ObjectList: {
-    screenName: "ObjectList",
-    params: undefined,
-  },
+    screenName: "ObjectList";
+    params: undefined;
+  };
+  ObjectDetail: {
+    screenName: "ObjectDetail";
+    params: {
+      objectId: number;
+    };
+  };
   CreateObject: {
-    screenName: "CreateObject",
-    params: undefined,
-  },
+    screenName: "CreateObject";
+    params: undefined;
+  };
   CompletionList: {
-    screenName: "CompletionList",
-    params: undefined,
-  },
+    screenName: "CompletionList";
+    params: undefined;
+  };
   Settings: {
-    screenName: "Settings",
-    params: undefined,
-  },
-} as const;
+    screenName: "Settings";
+    params: undefined;
+  };
+};
 
 type Params = {
-  [Key in keyof typeof Routes]: typeof Routes[Key]["params"];
+  [Key in keyof Routes]: Routes[Key]["params"];
 };
 
 export type RootTabParamList = Pick<
@@ -36,7 +42,7 @@ export type RootTabParamList = Pick<
 
 export type ObjectListStackParamList = Pick<
   Params,
-  "ObjectList" | "CreateObject"
+  "ObjectList" | "ObjectDetail" | "CreateObject"
 >;
 
 export type ObjectListScreenNavigationProp = CompositeNavigationProp<

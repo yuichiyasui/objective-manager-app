@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CompletionListScreen } from "~/screens/CompletionList";
 import { SettingsScreen } from "~/screens/Settings";
 import { ObjectListStackNavigation } from "./ObjectListStackNavigation";
-import { RootTabParamList, Routes } from "./routes";
+import { RootTabParamList } from "./routes";
 
 type IconProps = {
   focused: boolean;
@@ -34,7 +34,7 @@ export const BottomTabNavigation = (): JSX.Element => {
   return (
     <Tab.Navigator initialRouteName="ObjectListStackNavigation">
       <Tab.Screen
-        name={Routes.ObjectListStackNavigation.screen}
+        name={"ObjectListStackNavigation"}
         options={{
           tabBarLabel: "目標リスト",
           tabBarIcon: ObjectListIcon,
@@ -43,7 +43,7 @@ export const BottomTabNavigation = (): JSX.Element => {
         component={ObjectListStackNavigation}
       />
       <Tab.Screen
-        name={Routes.CompletionList.screenName}
+        name={"CompletionList"}
         options={{
           title: "達成リスト",
           tabBarLabel: "達成リスト",
@@ -52,7 +52,7 @@ export const BottomTabNavigation = (): JSX.Element => {
         component={CompletionListScreen}
       />
       <Tab.Screen
-        name={Routes.Settings.screenName}
+        name={"Settings"}
         options={{
           title: "設定",
           tabBarLabel: "設定",
