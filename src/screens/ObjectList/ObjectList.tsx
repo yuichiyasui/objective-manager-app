@@ -64,6 +64,7 @@ export const ObjectListScreen = (): JSX.Element => {
     <View style={styles.contentContainer}>
       <FlatList
         key={displayType === "gallery" ? "gallery" : "list"}
+        alwaysBounceVertical={false}
         ListHeaderComponent={
           <ListHeader
             displayType={displayType}
